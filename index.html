@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Especial: Salud Mental Estudiantil</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Georgia&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Salud Mental Estudiantil</h1>
+            <p>Un análisis exhaustivo sobre depresión y estilos de vida en 100,000 universitarios.</p>
+            <p class="author">Investigación por Axel Velasco Chavez</p>
+        </div>
+    </header>
+
+    <main class="container magazine-grid">
+        <!-- Main Content Column -->
+        <div class="main-content">
+            
+            <!-- 1. Dashboard General (KPIs) -->
+            <section class="article-section">
+                <h2>Indicadores Clave de Desempeño (KPIs)</h2>
+                <div class="kpi-grid">
+                    <div class="stat-box">
+                        <h3>Población Total</h3>
+                        <span class="large-val" id="total-students">-</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Tasa de Depresión</h3>
+                        <span class="large-val" id="depression-rate">-</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3>CGPA Promedio</h3>
+                        <span class="large-val" id="avg-cgpa">-</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Edad Promedio</h3>
+                        <span class="large-val" id="avg-age">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Panorama por Departamentos -->
+            <section class="article-section">
+                <h2>El Panorama por Departamentos</h2>
+                <p class="editorial-text">
+                    La vida universitaria contemporánea se enfrenta a desafíos sin precedentes. La distribución de la depresión por áreas académicas sugiere que ciertos entornos de estudio pueden ser más propensos a generar estrés crónico.
+                </p>
+                <div class="chart-wrapper">
+                    <canvas id="deptChart"></canvas>
+                </div>
+                <p class="insight" id="dept-insight"></p>
+            </section>
+
+            <!-- 3. Mental Health Status Pie -->
+            <section class="article-section">
+                <h2>Distribución del Estado Mental</h2>
+                <p class="editorial-text">Comparativa directa de la población estudiantil saludable frente a aquellos que presentan indicadores de depresión probable.</p>
+                <div class="chart-wrapper">
+                    <canvas id="distPieChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 4. Sleep Crisis (Line Chart) -->
+            <section class="article-section">
+                <h2>La Crisis del Sueño</h2>
+                <p class="editorial-text">
+                    Uno de los hallazgos más alarmantes es la correlación directa entre la privación del sueño y la salud mental. A medida que las horas de descanso disminuyen, la probabilidad de depresión se dispara exponencialmente.
+                </p>
+                <div class="chart-wrapper">
+                    <canvas id="sleepChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 5. Lifestyle Factors (Grouped Bars) -->
+            <section class="article-section">
+                <h2>Factores de Estilo de Vida</h2>
+                <p class="editorial-text">Un análisis de los hábitos diarios segmentados. La carga de estudio y el tiempo en redes sociales juegan roles determinantes en el bienestar emocional.</p>
+                <div class="chart-wrapper">
+                    <canvas id="lifestyleBarChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 6. Comparative Profiles (Interactive) -->
+            <section class="article-section">
+                <h2>Perfiles Comparativos</h2>
+                <p class="editorial-text">
+                    Analice las métricas de estilo de vida lado a lado. Seleccione una variable para ver la diferencia estadística entre ambos perfiles estudiantiles.
+                </p>
+                <div class="controls button-group" id="metricButtons">
+                    <button class="metric-btn active" data-metric="Sleep_Duration">Sueño</button>
+                    <button class="metric-btn" data-metric="Study_Hours">Estudio</button>
+                    <button class="metric-btn" data-metric="Social_Media_Hours">Redes Sociales</button>
+                    <button class="metric-btn" data-metric="Physical_Activity">Actividad Física</button>
+                    <button class="metric-btn" data-metric="Stress_Level">Estrés</button>
+                    <button class="metric-btn" data-metric="CGPA">CGPA</button>
+                </div>
+                <div class="comparison-grid">
+                    <div class="comp-panel">
+                        <h3>Estudiante Saludable</h3>
+                        <span class="large-val" id="val-false">-</span>
+                    </div>
+                    <div class="comp-panel active">
+                        <h3>Estudiante con Depresión</h3>
+                        <span class="large-val" id="val-true">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Gender & Dept Breakdown -->
+            <section class="article-section">
+                <h2>Prevalencia por Género y Facultad</h2>
+                <p class="editorial-text">La intersección entre el área de estudio y el género revela focos de atención específicos para políticas de bienestar universitario.</p>
+                <div class="chart-wrapper" style="height: 500px;">
+                    <canvas id="genderDeptChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 8. Correlation Heatmap -->
+            <section class="article-section">
+                <h2>Mapa de Interacciones (Correlaciones)</h2>
+                <p class="editorial-text">Análisis técnico de cómo se relacionan las variables numéricas. Un tono más oscuro indica una relación estadística más fuerte.</p>
+                <div class="chart-wrapper" id="heatmapContainer">
+                    <div id="heatmap-grid" class="heatmap"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sidebar Column -->
+        <aside class="sidebar">
+            <!-- Stress Analysis -->
+            <section class="article-section">
+                <h3>Análisis de Estrés</h3>
+                <div class="chart-wrapper" style="height: 250px;">
+                    <canvas id="stressChart"></canvas>
+                </div>
+                <div class="stat-box mini">
+                    <h4>Promedio Estrés (Saludable)</h4>
+                    <span class="large-val small" id="stress-avg-false">-</span>
+                </div>
+                <div class="stat-box mini">
+                    <h4>Promedio Estrés (Depresión)</h4>
+                    <span class="large-val small" id="stress-avg-true">-</span>
+                </div>
+            </section>
+
+            <div class="quote-card">
+                "La salud mental no es el destino, sino el vehículo para alcanzar el éxito académico."
+            </div>
+
+            <section class="article-section">
+                <h3>Conclusiones Editoriales</h3>
+                <ul id="conclusion-list" class="editorial-text">
+                    <!-- JS population -->
+                </ul>
+            </section>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Informe Especial de Salud Universitaria | Edición Axel Velasco Chavez</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">Análisis basado en 100,000 registros individuales.</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
